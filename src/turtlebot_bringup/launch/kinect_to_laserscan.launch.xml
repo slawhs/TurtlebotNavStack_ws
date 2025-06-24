@@ -1,8 +1,8 @@
 <launch>  
     <!-- Depth Image to Laser Scan Node -->
     <node pkg="depthimage_to_laserscan" exec="depthimage_to_laserscan_node" name="depthimage_to_laserscan">
-        <remap from="image"       to="/depth/image_raw"/>
-        <remap from="camera_info" to="/depth/camera_info"/> 
+        <remap from="depth"             to="/depth/image_raw"/>
+        <remap from="depth_camera_info" to="/depth/camera_info"/> 
 
         <!-- PARAMETERS: -->
         <!-- These are the default values. -->  
