@@ -1,4 +1,8 @@
 <launch>  
+
+    <!-- Kinect Node -->
+    <node pkg="kinect_ros2" exec="kinect_ros2_node" name="kinect_ros2_node"/>
+
     <!-- Depth Image to Laser Scan Node -->
     <node pkg="depthimage_to_laserscan" exec="depthimage_to_laserscan_node" name="depthimage_to_laserscan">
         <remap from="depth"             to="/depth/image_raw"/>
@@ -14,6 +18,7 @@
 	
     </node>
 
-    <node pkg="tf2_ros" exec="static_transform_publisher" name="base_link_to_laser" args="--x -15.0 --y 0 --z 30.0 --roll 0 --pitch 0 --yaw 0 --frame-id base_link --child-frame-id laser" />
-    
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="laser_to_camera_depth_frame" args="--x 0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id laser --child-frame-id camera_depth_frame" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="base_link_to_laser" args="--x -0.15 --y 0 --z 0.3 --roll 0 --pitch 0 --yaw 0 --frame-id base_link --child-frame-id laser" />
+
 </launch>

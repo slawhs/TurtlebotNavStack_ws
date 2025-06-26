@@ -1,0 +1,5 @@
+<launch>  
+
+    <node pkg="nav2_map_server" exec="map_server" name="map_server" args="/home/superuser/TurtlebotNavStack_ws/src/turtlebot_nav2_pkg/map/mapa.yaml"/>
+
+</launch>  
