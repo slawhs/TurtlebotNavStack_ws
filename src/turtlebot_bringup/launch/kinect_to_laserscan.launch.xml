@@ -1,5 +1,13 @@
 <launch>  
 
+    <arg name="initial_x" default="2.0" />
+    <arg name="initial_y" default="2.0" />
+    <arg name="initial_yaw" default="0.0" />
+
+
+    <!-- Kobuki Launch -->
+    <include file="$(find-pkg-share kobuki_node)/launch/kobuki_node-launch.py" />
+    
     <!-- Kinect Node -->
     <node pkg="kinect_ros2" exec="kinect_ros2_node" name="kinect_ros2_node"/>
 
@@ -11,14 +19,19 @@
         <!-- PARAMETERS: -->
         <!-- These are the default values. -->  
         <param name="scan_height"      value="5"/> <!-- default: 1 pixel. Number of pixel rows used to generate laser scan. -->
-        <param name="scan_time"        value="0.033"/> <!-- default:0.033, 30 FPS . Time between scans. -->
+        <param name="scan_time"        value="0.1"/> <!-- default:0.033, 30 FPS . Time between scans. -->
         <param name="range_min"        value="0.45"/> <!--default:0.45m. Ranges less than this are considered -Inf. -->
         <param name="range_max"        value="4.0"/> <!--default: 10m. Ranges less than this are considered +Inf. -->
         <param name="output_frame_id"  value="laser"/> <!--default: camera_depth_frame. Frame id of the laser scan. -->
 	
     </node>
 
-    <node pkg="tf2_ros" exec="static_transform_publisher" name="laser_to_camera_depth_frame" args="--x 0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id laser --child-frame-id camera_depth_frame" />
-    <node pkg="tf2_ros" exec="static_transform_publisher" name="base_link_to_laser" args="--x -0.15 --y 0 --z 0.3 --roll 0 --pitch 0 --yaw 0 --frame-id base_link --child-frame-id laser" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="baselink_to_map1" args="--x -0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id map --child-frame-id odom" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="baselink_to_map2" args="--x -0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id odom --child-frame-id base_footprint" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="baselink_to_map3" args="--x -0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id base_footprint --child-frame-id base_link" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="baselink_to_map4" args="--x -0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id base_link --child-frame-id camera_depth_frame" />
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="baselink_to_map5" args="--x -0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id camera_depth_frame --child-frame-id laser" />
 
 </launch>
+
+

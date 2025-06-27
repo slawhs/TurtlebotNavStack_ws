@@ -14,8 +14,9 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'map'), glob('map/*.yaml')),
-        (os.path.join('share', package_name, 'map'), glob('map/*.pgm'))
+        ('share/' + package_name, glob('map/*')),
+        (os.path.join('share', package_name), glob('nav2_params.yaml')),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
